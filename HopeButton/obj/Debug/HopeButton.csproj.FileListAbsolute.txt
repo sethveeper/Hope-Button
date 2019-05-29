@@ -8,3 +8,13 @@ C:\Users\Dominic\source\repos\HopeButton\HopeButton\obj\Debug\HopeButton.csproj.
 C:\Users\Dominic\source\repos\HopeButton\HopeButton\obj\Debug\HopeButton.csproj.CoreCompileInputs.cache
 C:\Users\Dominic\source\repos\HopeButton\HopeButton\obj\Debug\HopeButton.exe
 C:\Users\Dominic\source\repos\HopeButton\HopeButton\obj\Debug\HopeButton.pdb
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\bin\Debug\HopeButton.exe.config
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\bin\Debug\HopeButton.exe
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\bin\Debug\HopeButton.pdb
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\obj\Debug\HopeButton.csprojAssemblyReference.cache
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\obj\Debug\HopeButton.formGame.resources
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\obj\Debug\HopeButton.Properties.Resources.resources
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\obj\Debug\HopeButton.csproj.GenerateResource.cache
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\obj\Debug\HopeButton.csproj.CoreCompileInputs.cache
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\obj\Debug\HopeButton.exe
+C:\Users\Dominic\Desktop\Hope-Button\HopeButton\obj\Debug\HopeButton.pdb
