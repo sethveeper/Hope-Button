@@ -12,10 +12,11 @@ namespace HopeButton
 {
     public partial class formGame : Form
     {
+        // Declaring some useful variables.
         private long hopeTotal = 0;
-        
         private Log viewLog = new Log();
 
+        // Load the Logs.
         public void GetLogs()
         {
             string inName;
@@ -35,50 +36,74 @@ namespace HopeButton
             lstbxLog.SelectedIndex = 0;
         }
             
-
+        // START GAME
         public formGame()
         {
             InitializeComponent();
             GetLogs();
 
-            MessageBox.Show("Click the button to produce HOPE. Don't allow the progress bar to completely empty, or completely fill.");
-            progTime.Value = 50;
-            timeProg.Enabled = true;
+            string message = "Click the button to produce HOPE.\n" +
+                "Don't allow the Production bar to completely empty (Or you'll hurt yourself.)\n" +
+                "Don't allow the Production bar to completely fill (Or you will be fired.)";
+
+            MessageBox.Show(message);
         }
 
+        // Click the button to produce HOPE
         private void btnHope_Click(object sender, EventArgs e)
         {
-            progTime.Value -= 5;
-            hopeTotal++;
-            viewLog = (Log) lstbxLog.Items[lstbxLog.SelectedIndex];
-            if (progTime.Value <= 0)
+            // Start the timer!
+
+            if (timeProg.Enabled != true)
             {
+                timeProg.Enabled = true;
+                btnHope.Text = "Click to produce HOPE";
+            }
+
+            try
+            {
+                progTime.Value -= (progTime.Value / 5) + 3;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                progTime.Value = 0;
                 timeProg.Enabled = false;
                 MessageBox.Show("You're going too fast!");
                 System.Windows.Forms.Application.Exit();
             }
-            else if (viewLog.LogNumber == hopeTotal)
+            finally
             {
-                lstbxVisibleLog.Items.Add(viewLog);
-                txtboxLogName.Text = viewLog.LogName;
-                txtboxLogDescrip.Text = viewLog.LogDescrip;
+                hopeTotal++;
+                viewLog = (Log)lstbxLog.Items[lstbxLog.SelectedIndex];
 
-                lstbxLog.SelectedIndex++;
+                if (viewLog.LogNumber == hopeTotal)
+                {
+                    lstbxVisibleLog.Items.Add(viewLog);
+                    txtboxLogName.Text = viewLog.LogName;
+                    txtboxLogDescrip.Text = viewLog.LogDescrip;
+
+                    lstbxLog.SelectedIndex++;
+                }
             }
         }
 
+        // Don't dilly dally!
         private void timeProg_Tick(object sender, EventArgs e)
         {
-            progTime.Value += 5;
-
-            if (progTime.Value >= 100)
+            try
             {
+                progTime.Value += 10;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                progTime.Value = 100;
                 timeProg.Enabled = false;
                 MessageBox.Show("You're going too slow!");
                 System.Windows.Forms.Application.Exit();
             }
         }
 
+        // Here there be logs to read
         private void lstbxVisibleLog_SelectedIndexChanged(object sender, EventArgs e)
         {
             viewLog = (Log)lstbxVisibleLog.SelectedItem;

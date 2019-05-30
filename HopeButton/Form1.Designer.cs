@@ -46,7 +46,7 @@
             this.btnHope.Name = "btnHope";
             this.btnHope.Size = new System.Drawing.Size(162, 38);
             this.btnHope.TabIndex = 0;
-            this.btnHope.Text = "Click to produce HOPE";
+            this.btnHope.Text = "Ready to begin your shift?";
             this.btnHope.UseVisualStyleBackColor = true;
             this.btnHope.Click += new System.EventHandler(this.btnHope_Click);
             // 
