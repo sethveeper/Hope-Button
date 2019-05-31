@@ -113,12 +113,6 @@ namespace HopeButton
         // Don't dilly dally!
         private void timeProg_Tick(object sender, EventArgs e)
         {
-            if (StepProgBar(progEnergy, -1))
-            {
-                MessageBox.Show("You're going too fast!");
-                System.Windows.Forms.Application.Exit();
-            }
-
             if (StepProgBar(progProduct, -1))
             {
                 MessageBox.Show("You're going too slow!");
