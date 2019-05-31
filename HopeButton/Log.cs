@@ -24,6 +24,12 @@ namespace HopeButton
             logDescrip = inDescrip;
             logNumber = inNumber;
         }
+        public Log(string inName, string inDescrip)
+        {
+            logName = inName;
+            logDescrip = inDescrip;
+            logNumber = 0;
+        }
 
         public Log()
         {

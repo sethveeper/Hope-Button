@@ -36,6 +36,24 @@ namespace HopeButton
             lstbxLog.SelectedIndex = 0;
         }
             
+        // Sometimes we need to change the progress bars.
+        public bool StepProgBar(ProgressBar progBar, int amount)
+        {
+            bool range = false;
+
+            try
+            {
+                progBar.Value += amount;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                range = true;
+                timeProduct.Enabled = false;
+            }
+
+            return range;
+        }
+
         // START GAME
         public formGame()
         {
@@ -46,59 +64,70 @@ namespace HopeButton
                 "Don't allow the Production bar to completely empty (Or you'll hurt yourself.)\n" +
                 "Don't allow the Production bar to completely fill (Or you will be fired.)";
 
-            MessageBox.Show(message);
+            viewLog = new Log("First Day Tutorial", message);
+            txtboxLogName.Text = viewLog.LogName;
+            txtboxLogDescrip.Text = viewLog.LogDescrip;
+            lstbxVisibleLog.Items.Add(viewLog);
         }
 
         // Click the button to produce HOPE
         private void btnHope_Click(object sender, EventArgs e)
         {
             // Start the timer!
-
-            if (timeProg.Enabled != true)
+            if (timeProduct.Enabled != true)
             {
-                timeProg.Enabled = true;
+                timeProduct.Enabled = true;
+                progEnergy.Value = 1000;
+                progClock.Value = 0;
                 btnHope.Text = "Click to produce HOPE";
             }
 
-            try
+            // Reset the production bar!
+            progProduct.Value = 100;
+
+            // Remove some Energy!
+            if(StepProgBar(progEnergy, -5))
             {
-                progTime.Value -= (progTime.Value / 5) + 3;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                progTime.Value = 0;
-                timeProg.Enabled = false;
                 MessageBox.Show("You're going too fast!");
                 System.Windows.Forms.Application.Exit();
             }
-            finally
+
+
+            // Count the total number of times the button has been pressed!
+            hopeTotal++;
+
+            // Check for logs!
+            viewLog = (Log)lstbxLog.Items[lstbxLog.SelectedIndex];
+
+            if (viewLog.LogNumber == hopeTotal)
             {
-                hopeTotal++;
-                viewLog = (Log)lstbxLog.Items[lstbxLog.SelectedIndex];
+                lstbxVisibleLog.Items.Add(viewLog);
+                txtboxLogName.Text = viewLog.LogName;
+                txtboxLogDescrip.Text = viewLog.LogDescrip;
 
-                if (viewLog.LogNumber == hopeTotal)
-                {
-                    lstbxVisibleLog.Items.Add(viewLog);
-                    txtboxLogName.Text = viewLog.LogName;
-                    txtboxLogDescrip.Text = viewLog.LogDescrip;
-
-                    lstbxLog.SelectedIndex++;
-                }
+                lstbxLog.SelectedIndex++;
             }
+
         }
 
         // Don't dilly dally!
         private void timeProg_Tick(object sender, EventArgs e)
         {
-            try
+            if (StepProgBar(progEnergy, -1))
             {
-                progTime.Value += 10;
+                MessageBox.Show("You're going too fast!");
+                System.Windows.Forms.Application.Exit();
             }
-            catch (ArgumentOutOfRangeException)
+
+            if (StepProgBar(progProduct, -1))
             {
-                progTime.Value = 100;
-                timeProg.Enabled = false;
                 MessageBox.Show("You're going too slow!");
+                System.Windows.Forms.Application.Exit();
+            }
+
+            if (StepProgBar(progClock, 1))
+            {
+                MessageBox.Show("Congratulations! You completed your shift!");
                 System.Windows.Forms.Application.Exit();
             }
         }
