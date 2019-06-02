@@ -21,25 +21,21 @@ namespace HopeButton
         private Player One = new Player("Seth");
 
         // Load the Logs.
-        public Log[] logHope = new Log[50];
+        public Log[] logHope = new Log[11];
 
         public void GetLogs()
         {
-            string inName;
-            string inDescrip;
-            long inNumber;
-
-            // Test Logs
-            for (int i = 0; i < 50; i++)
-            {
-                inNumber = 10 * (i + 1);
-
-                inName = "HOPE Milestone: " + inNumber;
-                inDescrip = inNumber + " HOPE produced in total. Maybe this isn't so bad, after all.";
-                currentLog = new Log(inName, inDescrip, inNumber);
-                logHope[i] = currentLog;
-            }
-
+            logHope[0] = new Log("HOPE Milestone: 10", "10 HOPE produced in total. Producing HOPE takes up a small amount of Energy. Try not to run out...", 10);
+            logHope[1] = new Log("HOPE Milestone: 50", "50 HOPE produced in total. Maybe this won't be so bad after all...", 50);
+            logHope[2] = new Log("HOPE Milestone: 100", "100 HOPE produced in total. It doesn't seem like so many, but there they are...", 100);
+            logHope[3] = new Log("HOPE Milestone: 500", "500 HOPE produced in total. How many more will you produce?", 500);
+            logHope[4] = new Log("HOPE Milestone: 1000", "1000 HOPE produced in total. Every one of them will be consumed...", 1000);
+            logHope[5] = new Log("HOPE Milestone: 10000", "10000 HOPE produced in total. How long have you been here?", 10000);
+            logHope[6] = new Log("HOPE Milestone: 100000", "100000 HOPE produced in total. They will never be satisfied, will they...", 100000);
+            logHope[7] = new Log("HOPE Milestone: 1000000", "1000000 HOPE produced in total. Perhaps one day you'll be able to rest...", 1000000);
+            logHope[8] = new Log("HOPE Milestone: 10000000", "10000000 HOPE produced in total. How much longer can you stick it out?", 10000000);
+            logHope[9] = new Log("HOPE Milestone: 100000000", "100000000 HOPE produced in total. You must be weary... Will you ever be able to stop?", 100000000);
+            logHope[10] = new Log("HOPE Milestone: 1000000000", "1000000000 HOPE produced in total. Why are you here, anymore? What is the point?", 1000000000);
         }
 
         // Adds a log to the Visible Logs list box.
