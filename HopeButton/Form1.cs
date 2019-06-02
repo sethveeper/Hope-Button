@@ -12,31 +12,46 @@ namespace HopeButton
 {
     public partial class formGame : Form
     {
+        /*******************************
+         HERE THERE BE OUR OWN FUNCTIONS 
+         *******************************/
+
         // Declaring some useful variables.
-        private long hopeTotal = 0;
-        private Log viewLog = new Log();
+        private Log currentLog = new Log();
+        private Player One = new Player("Seth");
 
         // Load the Logs.
+        public Log[] logHope = new Log[50];
+
         public void GetLogs()
         {
             string inName;
             string inDescrip;
-            int inNumber;
+            long inNumber;
 
-            for (int i = 1; i < 99; i++)
+            // Test Logs
+            for (int i = 0; i < 50; i++)
             {
-                inNumber = i * 10;
-                
+                inNumber = 10 * (i + 1);
+
                 inName = "HOPE Milestone: " + inNumber;
-                inDescrip = inNumber + " HOPE produced in total. How many more will you produce?";
-                viewLog = new Log(inName, inDescrip, inNumber);
-                lstbxLog.Items.Add(viewLog);
+                inDescrip = inNumber + " HOPE produced in total. Maybe this isn't so bad, after all.";
+                currentLog = new Log(inName, inDescrip, inNumber);
+                logHope[i] = currentLog;
             }
 
-            lstbxLog.SelectedIndex = 0;
         }
-            
+
+        // Adds a log to the Visible Logs list box.
+        public void AddLog()
+        {
+            logVisible.Items.Add(currentLog);
+            txtboxLogName.Text = currentLog.LogName;
+            txtboxLogDescrip.Text = currentLog.LogDescrip;
+        }
+
         // Sometimes we need to change the progress bars.
+        // (I wonder if there's not already a method for this? Owo)
         public bool StepProgBar(ProgressBar progBar, int amount)
         {
             bool range = false;
@@ -54,20 +69,32 @@ namespace HopeButton
             return range;
         }
 
+        // Update and synchronise the miscellaneous player data.
+        public void UpdatePlayerBox()
+        {
+            lblName.Text = "Name: " + One.Name;
+            lblTotalDays.Text = "Days Worked: " + One.TotalDays.ToString();
+            lblTotalHope.Text = "HOPE: " + One.TotalHope.ToString();
+        }
+
+        /******************************
+         HERE THERE BE FORM'S FUNCTIONS 
+         ******************************/
+
         // START GAME
         public formGame()
         {
             InitializeComponent();
+
+            UpdatePlayerBox();
             GetLogs();
 
-            string message = "Click the button to produce HOPE.\n" +
-                "Don't allow the Production bar to completely empty (Or you'll hurt yourself.)\n" +
-                "Don't allow the Production bar to completely fill (Or you will be fired.)";
+            
 
-            viewLog = new Log("First Day Tutorial", message);
-            txtboxLogName.Text = viewLog.LogName;
-            txtboxLogDescrip.Text = viewLog.LogDescrip;
-            lstbxVisibleLog.Items.Add(viewLog);
+            string inName = "First Day Tutorial";
+            string inDescrip = "Press the button to produce HOPE, filling the Production bar.";
+            currentLog = new Log(inName, inDescrip);
+            AddLog();
         }
 
         // Click the button to produce HOPE
@@ -91,21 +118,18 @@ namespace HopeButton
                 MessageBox.Show("You're going too fast!");
                 System.Windows.Forms.Application.Exit();
             }
-
-
-            // Count the total number of times the button has been pressed!
-            hopeTotal++;
+            
+            // Update the total number of times the button has been pressed!
+            One.TotalHope++;
+            UpdatePlayerBox();
 
             // Check for logs!
-            viewLog = (Log)lstbxLog.Items[lstbxLog.SelectedIndex];
+            currentLog = (Log) logHope[One.IndexHope];
 
-            if (viewLog.LogNumber == hopeTotal)
+            if (currentLog.LogNumber == One.TotalHope)
             {
-                lstbxVisibleLog.Items.Add(viewLog);
-                txtboxLogName.Text = viewLog.LogName;
-                txtboxLogDescrip.Text = viewLog.LogDescrip;
-
-                lstbxLog.SelectedIndex++;
+                AddLog();
+                One.IndexHope++;
             }
 
         }
@@ -113,25 +137,38 @@ namespace HopeButton
         // Don't dilly dally!
         private void timeProg_Tick(object sender, EventArgs e)
         {
+
+            // Step down the Product progress bar.
             if (StepProgBar(progProduct, -1))
             {
                 MessageBox.Show("You're going too slow!");
                 System.Windows.Forms.Application.Exit();
             }
 
+            // Step up the Clock progress bar.
             if (StepProgBar(progClock, 1))
             {
                 MessageBox.Show("Congratulations! You completed your shift!");
                 System.Windows.Forms.Application.Exit();
             }
+
+            /*
+            // Check for "Half Way" story log.
+            if (progClock.Value == (progClock.Maximum / 2))
+            {
+                //AddLog(logStory);
+            }
+            */
+
+            UpdatePlayerBox();
         }
 
         // Here there be logs to read
         private void lstbxVisibleLog_SelectedIndexChanged(object sender, EventArgs e)
         {
-            viewLog = (Log)lstbxVisibleLog.SelectedItem;
-            txtboxLogName.Text = viewLog.LogName;
-            txtboxLogDescrip.Text = viewLog.LogDescrip;
+            currentLog = (Log)logVisible.SelectedItem;
+            txtboxLogName.Text = currentLog.LogName;
+            txtboxLogDescrip.Text = currentLog.LogDescrip;
         }
     }
 }

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace HopeButton
 {
 
-    class Log
+    public class Log
     {
         private string logName;
         private string logDescrip;
-        private int logNumber;
+        private long logNumber;
 
         public string LogName { get => logName; set => logName = value; }
         public string LogDescrip { get => logDescrip; set => logDescrip = value; }
-        public int LogNumber { get => logNumber; set => logNumber = value; }
+        public long LogNumber { get => logNumber; set => logNumber = value; }
 
 
-        public Log(string inName, string inDescrip, int inNumber)
+        public Log(string inName, string inDescrip, long inNumber)
         {
             logName = inName;
             logDescrip = inDescrip;

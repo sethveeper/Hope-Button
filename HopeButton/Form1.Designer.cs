@@ -31,17 +31,21 @@
             this.components = new System.ComponentModel.Container();
             this.btnHope = new System.Windows.Forms.Button();
             this.progProduct = new System.Windows.Forms.ProgressBar();
-            this.lstbxLog = new System.Windows.Forms.ListBox();
             this.timeProduct = new System.Windows.Forms.Timer(this.components);
             this.txtboxLogDescrip = new System.Windows.Forms.TextBox();
             this.txtboxLogName = new System.Windows.Forms.TextBox();
             this.lblLog = new System.Windows.Forms.Label();
             this.lblProgTime = new System.Windows.Forms.Label();
-            this.lstbxVisibleLog = new System.Windows.Forms.ListBox();
+            this.logVisible = new System.Windows.Forms.ListBox();
             this.progClock = new System.Windows.Forms.ProgressBar();
             this.lblClock = new System.Windows.Forms.Label();
             this.lblEnergy = new System.Windows.Forms.Label();
             this.progEnergy = new System.Windows.Forms.ProgressBar();
+            this.boxPlayerData = new System.Windows.Forms.GroupBox();
+            this.lblTotalDays = new System.Windows.Forms.Label();
+            this.lblTotalHope = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.boxPlayerData.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHope
@@ -61,15 +65,6 @@
             this.progProduct.Size = new System.Drawing.Size(162, 23);
             this.progProduct.TabIndex = 1;
             // 
-            // lstbxLog
-            // 
-            this.lstbxLog.FormattingEnabled = true;
-            this.lstbxLog.Location = new System.Drawing.Point(12, 156);
-            this.lstbxLog.Name = "lstbxLog";
-            this.lstbxLog.Size = new System.Drawing.Size(52, 17);
-            this.lstbxLog.TabIndex = 2;
-            this.lstbxLog.Visible = false;
-            // 
             // timeProduct
             // 
             this.timeProduct.Tick += new System.EventHandler(this.timeProg_Tick);
@@ -79,7 +74,7 @@
             this.txtboxLogDescrip.Location = new System.Drawing.Point(211, 82);
             this.txtboxLogDescrip.Multiline = true;
             this.txtboxLogDescrip.Name = "txtboxLogDescrip";
-            this.txtboxLogDescrip.Size = new System.Drawing.Size(162, 67);
+            this.txtboxLogDescrip.Size = new System.Drawing.Size(162, 110);
             this.txtboxLogDescrip.TabIndex = 3;
             // 
             // txtboxLogName
@@ -92,7 +87,7 @@
             // lblLog
             // 
             this.lblLog.AutoSize = true;
-            this.lblLog.Location = new System.Drawing.Point(211, 156);
+            this.lblLog.Location = new System.Drawing.Point(208, 195);
             this.lblLog.Name = "lblLog";
             this.lblLog.Size = new System.Drawing.Size(52, 13);
             this.lblLog.TabIndex = 5;
@@ -107,14 +102,14 @@
             this.lblProgTime.TabIndex = 6;
             this.lblProgTime.Text = "Production";
             // 
-            // lstbxVisibleLog
+            // logVisible
             // 
-            this.lstbxVisibleLog.FormattingEnabled = true;
-            this.lstbxVisibleLog.Location = new System.Drawing.Point(211, 172);
-            this.lstbxVisibleLog.Name = "lstbxVisibleLog";
-            this.lstbxVisibleLog.Size = new System.Drawing.Size(162, 225);
-            this.lstbxVisibleLog.TabIndex = 7;
-            this.lstbxVisibleLog.SelectedIndexChanged += new System.EventHandler(this.lstbxVisibleLog_SelectedIndexChanged);
+            this.logVisible.FormattingEnabled = true;
+            this.logVisible.Location = new System.Drawing.Point(211, 211);
+            this.logVisible.Name = "logVisible";
+            this.logVisible.Size = new System.Drawing.Size(162, 186);
+            this.logVisible.TabIndex = 7;
+            this.logVisible.SelectedIndexChanged += new System.EventHandler(this.lstbxVisibleLog_SelectedIndexChanged);
             // 
             // progClock
             // 
@@ -151,25 +146,66 @@
             this.progEnergy.Step = 1;
             this.progEnergy.TabIndex = 10;
             // 
+            // boxPlayerData
+            // 
+            this.boxPlayerData.Controls.Add(this.lblTotalDays);
+            this.boxPlayerData.Controls.Add(this.lblTotalHope);
+            this.boxPlayerData.Controls.Add(this.lblName);
+            this.boxPlayerData.Location = new System.Drawing.Point(12, 295);
+            this.boxPlayerData.Name = "boxPlayerData";
+            this.boxPlayerData.Size = new System.Drawing.Size(161, 79);
+            this.boxPlayerData.TabIndex = 13;
+            this.boxPlayerData.TabStop = false;
+            this.boxPlayerData.Text = "Worker Data";
+            // 
+            // lblTotalDays
+            // 
+            this.lblTotalDays.AutoSize = true;
+            this.lblTotalDays.Location = new System.Drawing.Point(1, 40);
+            this.lblTotalDays.Name = "lblTotalDays";
+            this.lblTotalDays.Size = new System.Drawing.Size(78, 13);
+            this.lblTotalDays.TabIndex = 2;
+            this.lblTotalDays.Text = "Days Worked: ";
+            // 
+            // lblTotalHope
+            // 
+            this.lblTotalHope.AutoSize = true;
+            this.lblTotalHope.Location = new System.Drawing.Point(1, 58);
+            this.lblTotalHope.Name = "lblTotalHope";
+            this.lblTotalHope.Size = new System.Drawing.Size(151, 13);
+            this.lblTotalHope.TabIndex = 1;
+            this.lblTotalHope.Text = "HOPE: 100000000000000000";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(1, 22);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(41, 13);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Name: ";
+            // 
             // formGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 445);
+            this.Controls.Add(this.boxPlayerData);
             this.Controls.Add(this.lblEnergy);
             this.Controls.Add(this.progEnergy);
             this.Controls.Add(this.lblClock);
             this.Controls.Add(this.progClock);
-            this.Controls.Add(this.lstbxVisibleLog);
+            this.Controls.Add(this.logVisible);
             this.Controls.Add(this.lblProgTime);
             this.Controls.Add(this.lblLog);
             this.Controls.Add(this.txtboxLogName);
             this.Controls.Add(this.txtboxLogDescrip);
-            this.Controls.Add(this.lstbxLog);
             this.Controls.Add(this.progProduct);
             this.Controls.Add(this.btnHope);
             this.Name = "formGame";
             this.Text = "Factory of Hope";
+            this.boxPlayerData.ResumeLayout(false);
+            this.boxPlayerData.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,17 +215,20 @@
 
         private System.Windows.Forms.Button btnHope;
         private System.Windows.Forms.ProgressBar progProduct;
-        private System.Windows.Forms.ListBox lstbxLog;
         private System.Windows.Forms.Timer timeProduct;
         private System.Windows.Forms.TextBox txtboxLogDescrip;
         private System.Windows.Forms.TextBox txtboxLogName;
         private System.Windows.Forms.Label lblLog;
         private System.Windows.Forms.Label lblProgTime;
-        private System.Windows.Forms.ListBox lstbxVisibleLog;
+        private System.Windows.Forms.ListBox logVisible;
         private System.Windows.Forms.ProgressBar progClock;
         private System.Windows.Forms.Label lblClock;
         private System.Windows.Forms.Label lblEnergy;
         private System.Windows.Forms.ProgressBar progEnergy;
+        private System.Windows.Forms.GroupBox boxPlayerData;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblTotalDays;
+        private System.Windows.Forms.Label lblTotalHope;
     }
 }
 
